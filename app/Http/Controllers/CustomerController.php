@@ -6,6 +6,7 @@ use App\Customer;
 use App\Http\Requests\FormCreateRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Session;
 
 class CustomerController extends Controller
 {
@@ -29,7 +30,7 @@ class CustomerController extends Controller
         $customer->name = $request->name;
         $customer->email = $request->email;
         $customer->save();
-        return redirect()->route('customers.index',compact('success'));
+        return redirect()->route('customers.index', compact('success'));
     }
 
     public function destroy($id)
@@ -50,7 +51,19 @@ class CustomerController extends Controller
         $customer = new Customer;
         $customer->name = $request->name;
         $customer->email = $request->email;
+        $customer->view_count=0;
         $customer->save();
-        return redirect()->route('customers.index',compact('success'));
+        return redirect()->route('customers.index', compact('success'));
+    }
+
+    public function detail($id)
+    {
+        $customer = Customer::find($id);
+        $customerKey = 'customer' . $id;
+        if (!Session::has($customerKey)) {
+            Customer::where('id', $id)->increment('view_count');
+            Session::put($customerKey, 1);
+        }
+        return view('customers.detail', compact('customer'));
     }
 }

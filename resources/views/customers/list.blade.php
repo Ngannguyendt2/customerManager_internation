@@ -17,7 +17,6 @@
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Name</th>
-                    <th scope="col">Email</th>
                     <th></th>
                 </tr>
                 </thead>
@@ -30,10 +29,9 @@
                     @foreach($customers as $key=>$customer)
                         <tr>
                             <th>{{++$key}}</th>
-                            <th>{{$customer->name}}</th>
-                            <th>{{$customer->email}}</th>
-                            <th><a href="{{route('customers.edit',$customer->id)}}" class="btn btn-primary">Edit</a>|<a
-                                    href="{{route('customers.destroy',$customer->id)}}" class="btn btn-danger"
+                            <th><a href="{{route('customers.detail',['id'=>$customer->id])}}">{{$customer->name}}</a></th>
+                            <th><a href="{{route('customers.edit',['id'=>$customer->id])}}" class="btn btn-primary">Edit</a>|<a
+                                    href="{{route('customers.destroy',['id'=>$customer->id])}}" class="btn btn-danger"
                                     onclick="return confirm('Are you sure want to delete?')">Delete</a></th>
                         </tr>
                     @endforeach
