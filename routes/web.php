@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('home');
 });
-Route::prefix('customers')->group(function () {
+Route::middleware('locale')->prefix('customers')->group(function () {
     Route::get('/', 'CustomerController@index')->name('customers.index');
     Route::get('/{id}/edit', 'CustomerController@edit')->name('customers.edit');
     Route::post('/{id}/edit', 'CustomerController@update')->name('customers.update');
@@ -25,3 +25,4 @@ Route::prefix('customers')->group(function () {
     Route::post('/create', 'CustomerController@store')->name('customers.store');
     Route::get('/{id}/detail','CustomerController@detail')->name('customers.detail');
 });
+Route::post('/change-language','CustomerController@changeLanguage')->name('changeLanguage');

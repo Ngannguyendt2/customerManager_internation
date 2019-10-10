@@ -27,6 +27,16 @@
     </style>
 </head>
 <body>
+<form method="post" action="{{route('changeLanguage')}}">
+    @csrf
+
+    <select onchange="this.form.submit()" name="language">
+        <option @if(Session::get('language')) selected @endif>{{Session::get('language')}}</option>
+        <option value="vi">vi</option>
+        <option value="en">en</option>
+    </select>
+</form>
+
 <div class="container">
     @yield('content')
 </div>

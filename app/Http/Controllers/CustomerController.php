@@ -68,4 +68,10 @@ class CustomerController extends Controller
         }
         return view('customers.detail', compact('customer'));
     }
+
+    public function changeLanguage(Request $request)
+    {
+        Session::put('language',$request->language);
+        return redirect()->back();
+    }
 }

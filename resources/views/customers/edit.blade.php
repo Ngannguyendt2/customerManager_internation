@@ -22,7 +22,7 @@
             <form method="post" action="{{route('customers.update',$customer->id)}}">
                 @csrf
                 <div class="form-group">
-                    <label >Full Name</label>
+                    <label >@lang('message.name')</label>
                     <input type="text" class="form-control" placeholder="full name" name="name" value="{{$customer->name}}" >
                 </div>
                 <div class="form-group">
